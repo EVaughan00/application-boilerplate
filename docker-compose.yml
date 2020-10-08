@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+
+  apigateway:
+    container_name: apigateway
+    ports: 
+      - 5100:80
+    build:
+      context: .
+      dockerfile: Services/APIGateway/Dockerfile
+
+
+  ## Example microservice usage
+
+  # identity:
+  #   container_name: identity
+  #   ports: 
+  #     - 5101:80
+  #   build:
+  #     context: .
+  #     dockerfile: Services/Identity/API/Dockerfile
