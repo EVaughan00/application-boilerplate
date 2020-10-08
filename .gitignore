@@ -1,0 +1,8 @@
+/.vs
+/.vscode
+
+**/log.txt
+
+**/bin/
+**/obj/
+**/node_modules/
