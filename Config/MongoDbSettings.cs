@@ -12,7 +12,7 @@ namespace Application.Config
         public string ConnectionString {
             get { 
                 if (string.IsNullOrWhiteSpace(Host))
-                    Host = "localhost";
+                    Host = "mongo";
 
                 if (string.IsNullOrWhiteSpace(Port))
                     Port = "27017";

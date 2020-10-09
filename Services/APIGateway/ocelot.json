@@ -1,7 +1,7 @@
 {
   "ReRoutes": [
     {
-      "DownstreamPathTemplate": "/api/auth{everything}",
+      "DownstreamPathTemplate": "/api/identity{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -9,20 +9,8 @@
           "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/auth{everything}",
+      "UpstreamPathTemplate": "/identity{everything}",
       "UpstreamHttpMethod": [ "Get", "Post" ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/users{everything}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "profile",
-          "Port": 80
-        }
-      ],
-      "UpstreamPathTemplate": "/users{everything}",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete", "Options" ]
     }
   ]
 }

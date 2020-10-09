@@ -14,12 +14,11 @@
             "modifiers": [
                 {
                     "exclude": [
-                        "**/.git/**"
+                        "**/.git/**",
+                        ".gitignore"
                     ]
                 }
             ]
         }
-    ],
-    "sourceName": "Template",
-    "preferNameDirectory": true
+    ]
   }
