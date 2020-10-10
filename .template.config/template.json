@@ -20,5 +20,7 @@
                 }
             ]
         }
-    ]
+    ],
+    "sourceName": "Boilerplate",
+    "preferNameDirectory": true
   }
