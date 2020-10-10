@@ -20,7 +20,7 @@ API Gateway is implemented using [Ocelot](https://github.com/ThreeMammals/Ocelot
 
 > This application runs on `http://localhost:5000`
 
-### Auth Resource (TODO)
+## Auth Resource (TODO)
 Auth Resource is a simple REST Service that provides us with **JWT** (JSON Web Token) which we must propagate through ours microservices in order to pass the security gates. 
 
 In this case, there is a *util class* called `JwtGenerator` with method called `Generate` which takes two arguments; username (for JWT sub Claim) and role name. Role name is essential since we want to guard our endpoints in microservices with `[Authorize(Roles = "ROLE_NAME")]`.
@@ -35,6 +35,6 @@ The dotnet microservice template is best used with the application boilerplate s
 all dependency paths as well as an API Gateway for microservices placed in the 'Services' directory. 
 Docker-compose is used to spin up, microservices, databases, and the API Gateway.
 
-# Microservices Communication (TODO)
+## Microservices Communication (TODO)
 
 Communication between microservices can be both async and sync. Synchronous (*REST*) communication is yet to be implemented in near future, though asynchronous (*RabbitMQ*) will be when it becomes necessary.
