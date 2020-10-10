@@ -1,7 +1,16 @@
-# .NET CORE 3.0 Microservices Boilerplate
-Microservices architecture boilerplate with an **API GATEWAY**, **Auth Resource** and **User Microservice**. 
+## Dotnet application boilerplate
 
-**Swagger API Documentation**, **Security with JWT** (Authentication, Authorization based on roles in token), **Globalized Exception Handler** that supports custom exceptions.
+Install the dotnet template using:
+
+dotnet new -i ./
+
+Create a new application using:
+
+dotnet new boilerplate -n Application
+
+The dotnet microservice template is best used with the application boilerplate structure. The boilerplate contains
+all dependency paths as well as an API Gateway for microservices placed in the 'Services' directory. 
+Docker-compose is used to spin up, microservices, databases, and the API Gateway.
 
 # Structure
 The basic structure looks like this:
@@ -9,11 +18,6 @@ The basic structure looks like this:
 ![application structure](https://i.ibb.co/Dwfky4g/New-Project.png)
 
 Pretty frequent architecture; client sends a request to the API Gateway, it decides where the request will proceed. Assuming all of our microservices are secured with at least JWT Authorization, Auth Resource provides a new JWT.
-
-### Client
-
-In this case, client is either Postman, Insomnia etc. or Swagger Documentation which is implemented in *User Microservice*.
-There are **Nuget Packages** including [this one](https://github.com/Burgyn/MMLib.SwaggerForOcelot) that provide Swagger Documentation on the *Gateway* level, but it is yet to be implemented in this project.
 
 ### API Gateway
 API Gateway is implemented using [Ocelot](https://github.com/ThreeMammals/Ocelot).  **Ocelot** makes it very simple to map microservices to specific routes using only *json configuration file* (in this case called `ocelot.json`.
