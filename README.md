@@ -15,7 +15,7 @@ The basic structure looks like this:
 
 Pretty frequent architecture; client sends a request to the API Gateway, it decides where the request will proceed. Assuming all of our microservices are secured with at least JWT Authorization, Auth Resource provides a new JWT.
 
-### API Gateway
+## API Gateway
 API Gateway is implemented using [Ocelot](https://github.com/ThreeMammals/Ocelot).  **Ocelot** makes it very simple to map microservices to specific routes using only *json configuration file* (in this case called `ocelot.json`.
 
 > This application runs on `http://localhost:5000`
