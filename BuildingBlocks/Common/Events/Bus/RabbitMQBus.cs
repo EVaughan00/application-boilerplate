@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Application.Config;
 
 namespace BuildingBlocks.Common.Events.Bus
 {
@@ -29,7 +30,8 @@ namespace BuildingBlocks.Common.Events.Bus
 
         public void Publish<T>(T @event) where T : Event
         {
-            var factory = new ConnectionFactory() { HostName = "localhost" };
+            var factory = new ConnectionFactory() { HostName = new RabbitMQSettings().ConnectionString };
+
             using (var connection = factory.CreateConnection())
             using (var channel = connection.CreateModel())
             {
