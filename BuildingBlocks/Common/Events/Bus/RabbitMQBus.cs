@@ -19,6 +19,7 @@ namespace BuildingBlocks.Common.Events.Bus
         private readonly Dictionary<string, List<Type>> _handlers;
         private readonly List<Type> _eventTypes;
         private readonly IServiceScopeFactory _serviceScopeFactory;
+        private readonly RabbitMQSettings _rabbitMQSettings;
 
         public RabbitMQBus(IMediator mediator, IServiceScopeFactory serviceScopeFactory)
         {
@@ -26,11 +27,14 @@ namespace BuildingBlocks.Common.Events.Bus
             _serviceScopeFactory = serviceScopeFactory;
             _handlers = new Dictionary<string, List<Type>>();
             _eventTypes = new List<Type>();
+
+            _rabbitMQSettings = new RabbitMQSettings();
+
         }
 
         public void Publish<T>(T @event) where T : Event
         {
-            var factory = new ConnectionFactory() { HostName = new RabbitMQSettings().ConnectionString };
+            var factory = new ConnectionFactory() { HostName = _rabbitMQSettings.ConnectionString };
 
             using (var connection = factory.CreateConnection())
             using (var channel = connection.CreateModel())
@@ -79,7 +83,7 @@ namespace BuildingBlocks.Common.Events.Bus
         {
             var factory = new ConnectionFactory()
             {
-                HostName = "localhost",
+                HostName = _rabbitMQSettings.ConnectionString,
                 DispatchConsumersAsync = true
             };
 

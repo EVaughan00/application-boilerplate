@@ -10,8 +10,7 @@ services:
       context: .
       dockerfile: Services/APIGateway/Dockerfile
 
-
-  ## Example microservice usage
+    ## Example microservice
 
   # identity:
   #   container_name: identity
@@ -20,6 +19,23 @@ services:
   #   build:
   #     context: .
   #     dockerfile: Services/Identity/Identity.API/Dockerfile
+  #   restart: on-failure
+  #   depends_on:
+  #     - rabbitmq
+
+
+  rabbitmq:
+    image: rabbitmq
+    container_name: rabbitmq
+    command: rabbitmq-server
+    ports:
+      - 5672:5672
+      - 15672:15672
+    healthcheck:
+      test: [ "CMD", "nc", "-z", "localhost", "5672" ]
+      interval: 5s
+      timeout: 15s
+      retries: 1
 
   mongo:
     image: mongo:latest
