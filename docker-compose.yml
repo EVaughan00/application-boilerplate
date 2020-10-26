@@ -10,15 +10,26 @@ services:
       context: .
       dockerfile: Services/APIGateway/Dockerfile
 
-    ## Example microservice
+  user:
+    container_name: user
+    ports: 
+      - 5101:80
+    build:
+      context: .
+      dockerfile: Services/AuthResource/AuthResource.API/Dockerfile
+    restart: on-failure
+    depends_on:
+      - rabbitmq
 
-  # identity:
-  #   container_name: identity
+      ## Example Microservice
+
+  # shoppingcart:
+  #   container_name: shoppingcart
   #   ports: 
-  #     - 5101:80
+  #     - 5102:80
   #   build:
   #     context: .
-  #     dockerfile: Services/Identity/Identity.API/Dockerfile
+  #     dockerfile: Services/ShoppingCart/ShoppingCart.API/Dockerfile
   #   restart: on-failure
   #   depends_on:
   #     - rabbitmq
