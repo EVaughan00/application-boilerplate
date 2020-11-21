@@ -9,7 +9,6 @@ namespace AuthResource.Infrastructure
         void Create(User User);
         List<User> GetAll();
         User GetById(string id);
-        // void Update(User User);
-        // void Delete(string email);        
+        void Update(User user);       
     }    
 }

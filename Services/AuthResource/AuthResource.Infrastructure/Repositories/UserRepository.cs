@@ -3,6 +3,7 @@ using AuthResource.Domain.Aggregates;
 using BuildingBlocks.SeedWork;
 using MongoDB.Bson;
 using System.Collections.Generic;
+using System;
 
 namespace AuthResource.Infrastructure
 {
@@ -51,56 +52,17 @@ namespace AuthResource.Infrastructure
             return result;
         }
 
-        // public user GetByEmail(string email) 
-        // {
-        //     email = email.ToLower();
-        //     var result = _users.FindOne(u => u.Email.Equals(email));
+        public void Update(User user)
+        {
+            var existing = _users.FindOne(u => u.Username == user.Username);
+            var duplicate = _users.FindOne(u => u.Email == user.Email);
 
-        //     if (result == null) 
-        //     {
-        //         _logger.LogInformation($"Non-existant user [{email}] retrieval attempted");
-        //         var ex = new ApiException($"That username and / or password are incorrect");
-        //         ex.AddError("password", ex.Message);
+            if (existing == null)
+            {
+                throw new Exception($"No user exists to update");
+            }
 
-        //         throw ex;
-        //     }
-
-        //     _logger.LogInformation($"user [{email}] retrieved from database");
-        //     return result;
-        // }
-
-        // public void Update(user user)
-        // {
-        //     var existing = _users.FindOne(u => u.Id == user.Id);
-        //     var duplicate = _users.FindOne(u => u.Email.Equals(user.Email.Address));
-
-        //     if (existing == null)
-        //     {
-        //         throw new IdentityInfrastructureException($"No user exists to update");
-        //     }
-
-        //     if (duplicate != null && !existing.Equals(duplicate))  
-        //     {                
-        //         var ex = new ApiException($"That email is already taken");
-        //         ex.AddError("email", ex.Message);
-
-        //         throw ex;
-        //     }
-
-        //     _users.UpdateOne(user);
-        // }
-
-        // public void Delete(string email)
-        // {
-        //     try {
-        //         GetByEmail(email);
-
-        //         _logger.LogInformation($"user [{email}] removed from database");
-        //         _users.DeleteOne(u => u.Email.Address == email);
-        //     } catch {
-        //         _logger.LogInformation($"Non-existant user [{email}] deletion attempted");
-        //         throw new IdentityInfrastructureException($"No user with an email: \"{email}\" exists to delete");
-        //     }
-        // }
+            _users.UpdateOne(user);
+        }
     }
 }

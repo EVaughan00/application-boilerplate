@@ -5,21 +5,21 @@ using System;
 using System.Threading.Tasks;
 using AuthResource.API.Commands;
 using AuthResource.API.Queries;
-using AuthResource.Domain;
 using System.Collections.Generic;
 using AuthResource.API.DTO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AuthResource.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class AuthController : ControllerBase
     {
 
         private readonly IMediator _mediator;
-        private readonly ILogger<UserController> _logger;
+        private readonly ILogger<AuthController> _logger;
 
-        public UserController(IMediator mediator, ILogger<UserController> logger)
+        public AuthController(IMediator mediator, ILogger<AuthController> logger)
         {
             this._logger = logger;
             this._mediator = mediator;
@@ -49,8 +49,9 @@ namespace AuthResource.API.Controllers
             };
         }
 
-        [HttpGet("Users")]
-        public async Task<ActionResult<List<UserResponseDTO>>> GetAll()
+        [HttpGet("details")]
+        [Authorize]
+        public async Task<ActionResult<List<UserResponseDTO>>> Details()
         {
             try {
                 var result = await _mediator.Send(new UserQuery());

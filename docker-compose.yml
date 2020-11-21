@@ -10,8 +10,8 @@ services:
       context: .
       dockerfile: Services/APIGateway/Dockerfile
 
-  user:
-    container_name: user
+  authresource:
+    container_name: authresource
     ports: 
       - 5101:80
     build:

@@ -4,6 +4,7 @@ using System.Reflection;
 using AuthResource.API.Commands;
 using AuthResource.API.Queries;
 using BuildingBlocks.Common;
+using AuthResource.API.Application.DomainEventHandlers;
 
 namespace AuthResource.API.Initializers
 {
@@ -25,6 +26,9 @@ namespace AuthResource.API.Initializers
 
             builder.RegisterAssemblyTypes(typeof(ReferenceQueryHandler).GetTypeInfo().Assembly)
                 .AsClosedTypesOf(typeof(IRequestHandler<,>));
+
+            builder.RegisterAssemblyTypes(typeof(ReferenceDomainEventHandler).GetTypeInfo().Assembly)
+                .AsClosedTypesOf(typeof(INotificationHandler<>));
 
             builder.Register<ServiceFactory>(context => {
                 var componentContext = context.Resolve<IComponentContext>();

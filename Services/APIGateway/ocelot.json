@@ -1,15 +1,15 @@
 {
   "ReRoutes": [
     {
-      "DownstreamPathTemplate": "/api/user{everything}",
+      "DownstreamPathTemplate": "/api/auth{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "user",
+          "Host": "authresource",
           "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/user{everything}",
+      "UpstreamPathTemplate": "/auth{everything}",
       "UpstreamHttpMethod": [ "Get", "Post" ]
     }
   ]

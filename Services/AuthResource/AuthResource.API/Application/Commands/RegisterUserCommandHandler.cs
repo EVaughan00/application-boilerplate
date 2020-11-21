@@ -1,11 +1,14 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using BuildingBlocks.Common.Events;
 using BuildingBlocks.Common;
 using AuthResource.Infrastructure;
 using AuthResource.Domain.Aggregates;
 using AuthResource.API.DTO;
 using AuthResource.API.Utils;
+using AuthResource.Domain.Events;
+using MediatR;
 
 namespace AuthResource.API.Commands
 {
@@ -34,10 +37,17 @@ namespace AuthResource.API.Commands
 
             _users.Create(new User(command.username, command.password, command.email));
 
-            if (_users.GetById(command.username) == null) {
+            var user = _users.GetById(command.username);
+
+            if (user == null)
+            {
                 _logger.LogInformation("Could not register user: " + command.username);
                 throw new System.Exception("Could not create user");
             }
+
+            user.AddDomainEvent(new UserCreatedDomainEvent() { Username = command.username });
+
+            _users.Update(user);
 
             return new UserTokenResponseDTO() { token = jwt };
         }

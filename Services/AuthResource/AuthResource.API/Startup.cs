@@ -11,9 +11,6 @@ using System.IO;
 using System;
 using AuthResource.API.Initializers;
 using Application.Config;
-using BuildingBlocks.Common.Events;
-using AuthResource.Domain.Events;
-using BuildingBlocks.Common.Events.Bus;
 
 namespace AuthResource.API 
 {
@@ -61,6 +58,9 @@ namespace AuthResource.API
             app.UseMiddleware(typeof(ErrorHandlingMiddleware));
 
             app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
             // app.UseHttpsRedirection();
 
             app.UseSwagger();
